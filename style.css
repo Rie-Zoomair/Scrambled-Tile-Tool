@@ -1,0 +1,402 @@
+:root {
+  /* 8pt grid spacing system */
+  --space-1x: 8px;
+  --space-2x: 16px;
+  --space-3x: 24px;
+  --space-4x: 32px;
+  --space-5x: 40px;
+  --space-6x: 48px;
+  --space-7x: 56px;
+  --space-8x: 64px;
+  --space-9x: 72px;
+  --space-15x: 120px;
+}
+/* DEBUG Component Grid
+ * {
+  outline: 1px solid rgba(255, 0, 0, 0.2);
+}*/
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: black;
+  color: #fff;
+  overflow: hidden;
+}
+
+#canvas-holder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+.ui-panel {
+  position: absolute;
+  top: 50%;
+  left: var(--space-15x);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2x);
+  width: 240px;
+  color: white;
+
+  z-index: 10; /* Add this line */
+}
+
+.input-toggle-wrapper {
+  position: relative;
+  width: 100%;
+  height: 48px; /* Fixed height to prevent jump */
+}
+
+.input-toggle-wrapper > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 4px;
+  text-align: left;
+  width: auto;
+}
+
+.ui-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1x);
+}
+
+/* Button Styles */
+.btn,
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px; /* Match dropdown height */
+  padding: 0 var(--space-2x);
+  font-size: 14px;
+  color: #f1f1f1;
+  background: transparent;
+  border: 1px solid #f1f1f1;
+  border-radius: 999px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+  text-align: center;
+}
+
+.btn:hover,
+.file-label:hover {
+  background: white;
+  color: black;
+}
+.btn:hover:not(.active):not(:disabled),
+.file-label:hover:not(.active):not(:disabled) {
+  background-color: rgba(241, 241, 241, 0.4);
+  color: #f1f1f1;
+  border-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn.active {
+  background: #ffff00; /* bright yellow */
+  color: black;
+  border-color: #ffff00;
+}
+
+.btn.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Toggle Button Group */
+.toggle-group {
+  display: flex;
+  gap: var(--space-1x);
+}
+
+/* Range Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #0a0a0a;
+  border: 1px solid #f1f1f1;
+  border-radius: 999px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Webkit browsers (Chrome, Safari) */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  background: black;
+  border: 1px solid #f1f1f1;
+  border-radius: 999px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  background: black;
+  border: 2px solid #f1f1f1; 
+  border-radius: 50%;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: black;
+  border: 1px solid #f1f1f1;
+  border-radius: 999px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  background: black;
+  border: 2px solid #f1f1f1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+/* Drop Down */
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  border-radius: 999px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+  transform: translateZ(0); 
+}
+
+.select-wrapper:hover {
+  background-color: rgba(241, 241, 241, 0.4);
+}
+
+.select-wrapper select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--space-2x);
+  font-size: 14px;
+  color: #f1f1f1;
+  background: transparent;
+  border: none;
+  appearance: none;
+  text-align: center;
+  text-align-last: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-wrapper select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Dropdown arrow */
+.select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: var(--space-2x);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 14px;
+  color: #f1f1f1;
+}
+
+/* File input hidden */
+input[type="file"] {
+  display: none;
+}
+
+/* Footer Text */
+.footer {
+  position: absolute;
+  bottom: var(--space-2x);
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  pointer-events: none;
+}
+
+y.shortcut-help {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+}
+
+.tooltip-container {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.tooltip-icon {
+  background-color: rgb(255, 255, 0);
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 999px;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  cursor: default;
+  font-size: 16px;
+  border: 1px solid #1a1a1a;
+
+  animation: ping-rotate 12s infinite;
+  transform-origin: center;
+}
+
+.tooltip-icon.seen-tooltip {
+  animation: none !important;
+}
+
+@keyframes ping-rotate {
+  0%   { transform: scale(1) rotate(0deg); opacity: 1; }
+  2%   { transform: scale(1.1) rotate(-2deg); opacity: 0.9; }
+  4%   { transform: scale(1.1) rotate(2deg); }
+  6%   { transform: scale(1.1) rotate(-1deg); }
+  8%   { transform: scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+
+.tooltip-text {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+  border: 1px solid rgb(255, 255, 0);
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 260px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.tooltip-container:hover .tooltip-text {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#tooltip {
+  box-sizing: border-box;
+  padding: 12px 16px;
+  position: absolute;
+  background: black;
+  color: #f1f1f1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  width: 240px;
+  font-size: 13px;
+  line-height: 1.4;
+  z-index: 999;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid rgb(255, 255, 0);
+}
+
+#tooltip.show {
+  opacity: 1;
+}
+
+#tooltip.hidden {
+  opacity: 0;
+}
+.highlighted {
+  color: rgb(255, 255, 0);
+}
+.ui-panel,
+#canvas-holder,
+.footer,
+.tooltip-container {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.1s ease, visibility 0.1s ease;
+}
+
+#small-screen-warning {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0s linear 0.2s;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: yellow;
+  font-size: 14px;
+  font-family: sans-serif;
+  background: black;
+  padding: 20px 30px;
+  border: 1px solid yellow;
+  border-radius: 8px;
+  z-index: 9999;
+  text-align: center;
+}
+
+@media (max-width: 1340px), (max-height: 700px) {
+  .ui-panel,
+  #canvas-holder,
+  .footer,
+  .tooltip-container {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #small-screen-warning {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.2s ease 0.2s, visibility 0s linear 0.2s;
+  }
+}
+
